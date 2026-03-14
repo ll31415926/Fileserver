@@ -1,8 +1,8 @@
 #!/bin/bash
 # fcurl.sh - File Server Curl Helper for Linux/macOS
 # Usage: ./fcurl.sh <URL>
-# Example: ./fcurl.sh http://127.0.0.1:8080/shared/test.txt 
-#          ./fcurl.sh http://127.0.0.1:8080/shared/ 
+# Example: ./fcurl.sh http://127.0.0.1:8080/shared/test.txt
+#          ./fcurl.sh http://127.0.0.1:8080/shared/
 
 if [ $# -lt 1 ]; then
     echo "Usage: $0 <URL>"
@@ -44,7 +44,7 @@ if [ $IS_DIR -eq 0 ]; then
     if [ -n "$PATH_PART" ]; then
         # Extract the last part of the path
         LAST_PART=$(basename "$PATH_PART")
-        
+
         # Check if last part contains dot (has extension)
         if [[ ! "$LAST_PART" =~ \. ]]; then
             # No extension, treat as directory
