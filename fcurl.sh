@@ -66,7 +66,12 @@ else
 fi
 
 # 获取脚本所在目录，用于找到 sign 程序
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# 如果是软链接，获取真实路径
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+if [ -L "$SCRIPT_PATH" ]; then
+    SCRIPT_PATH=$(readlink -f "$SCRIPT_PATH")
+fi
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
 
 # Call sign and get signed URL
 SIGNED_URL=$("${SCRIPT_DIR}/sign" "$SIGN_URL" 2>/dev/null | grep "^http://")
